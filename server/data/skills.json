@@ -1,0 +1,112 @@
+[
+  {
+    "_id": "mock-s1",
+    "name": "Python",
+    "category": "Backend"
+  },
+  {
+    "_id": "mock-s2",
+    "name": "FastAPI",
+    "category": "Backend"
+  },
+  {
+    "_id": "mock-s3",
+    "name": "Django",
+    "category": "Backend"
+  },
+  {
+    "_id": "mock-s4",
+    "name": "Flask",
+    "category": "Backend"
+  },
+  {
+    "_id": "mock-s5",
+    "name": "Pandas",
+    "category": "Database"
+  },
+  {
+    "_id": "mock-s6",
+    "name": "NumPy",
+    "category": "Database"
+  },
+  {
+    "_id": "mock-s7",
+    "name": "Scikit-Learn",
+    "category": "Database"
+  },
+  {
+    "_id": "mock-s8",
+    "name": "PostgreSQL",
+    "category": "Database"
+  },
+  {
+    "_id": "mock-s9",
+    "name": "MongoDB",
+    "category": "Database"
+  },
+  {
+    "_id": "mock-s10",
+    "name": "SQLite",
+    "category": "Database"
+  },
+  {
+    "_id": "mock-s11",
+    "name": "React.js",
+    "category": "Frontend"
+  },
+  {
+    "_id": "mock-s12",
+    "name": "TypeScript",
+    "category": "Frontend"
+  },
+  {
+    "_id": "mock-s13",
+    "name": "Tailwind CSS",
+    "category": "Frontend"
+  },
+  {
+    "_id": "mock-s14",
+    "name": "Docker",
+    "category": "Tools"
+  },
+  {
+    "_id": "mock-s15",
+    "name": "Git",
+    "category": "Tools"
+  },
+  {
+    "_id": "mock-s16",
+    "name": "GitHub",
+    "category": "Tools"
+  },
+  {
+    "_id": "mock-s17",
+    "name": "SEO Optimization",
+    "category": "Tools"
+  },
+  {
+    "_id": "mock-s19",
+    "name": "Web Development",
+    "category": "Frontend"
+  },
+  {
+    "_id": "mock-s20",
+    "name": "Communication Skills",
+    "category": "Soft Skills"
+  },
+  {
+    "_id": "mock-s21",
+    "name": "Team Collaboration",
+    "category": "Soft Skills"
+  },
+  {
+    "_id": "mock-s22",
+    "name": "Languages (Telugu, Hindi, English)",
+    "category": "Soft Skills"
+  },
+  {
+    "_id": "mock-s23",
+    "name": "Problem Solving",
+    "category": "Soft Skills"
+  }
+]

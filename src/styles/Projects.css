@@ -1,0 +1,92 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.projects {
+  padding: 40px;
+  box-sizing: border-box;
+  max-width: 800px;
+  text-align: center;
+}
+
+.projects h1 {
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+.projects p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.project-item {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-item h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.project-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Tech stack badges */
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.tech-badge {
+  background: #e8f0fe;
+  color: #1a73e8;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Loading / Error */
+.loading-text {
+  color: #888;
+  font-style: italic;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.error-text {
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

@@ -1,0 +1,15 @@
+# render.yaml — Render deployment configuration for the Express backend
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: portfolio-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false       # Set this manually in Render dashboard — never commit to Git
+      - key: NODE_ENV
+        value: production

@@ -1,0 +1,77 @@
+[
+  {
+    "_id": "mock-p1",
+    "title": "Mlhackathon-25",
+    "description": "Machine Learning project repository built during the National-Level ML Workshop & Hackathon at ANITS. Implements custom predictive models and dataset analysis pipelines.",
+    "link": "https://github.com/suryaprabhat/Mlhackathon-25",
+    "techStack": [
+      "Python",
+      "Scikit-Learn",
+      "Pandas",
+      "NumPy"
+    ],
+    "createdAt": "2026-07-04T17:45:38.895Z"
+  },
+  {
+    "_id": "mock-p2",
+    "title": "ChildrenTherapy-Center",
+    "description": "A full-stack React and Express platform designed to coordinate therapy services for children. Supports patient intakes, administrative scheduling, and session tracking.",
+    "link": "https://github.com/suryaprabhat/ChildrenTherapy-Center",
+    "techStack": [
+      "TypeScript",
+      "React.js",
+      "Node.js",
+      "Express.js"
+    ],
+    "createdAt": "2026-07-04T17:45:38.895Z"
+  },
+  {
+    "_id": "mock-p3",
+    "title": "email-triage-env",
+    "description": "An intelligent email sorting and parsing system in Python, built to categorize and prioritize inbox items automatically using custom heuristics.",
+    "link": "https://github.com/suryaprabhat/email-triage-env",
+    "techStack": [
+      "Python",
+      "Automation",
+      "Regular Expressions"
+    ],
+    "createdAt": "2026-07-04T17:45:38.895Z"
+  },
+  {
+    "_id": "mock-p4",
+    "title": "college-discovery",
+    "description": "A search and analytics portal that helps undergraduate candidates filter and discover engineering and arts colleges based on district, course ratings, and ranking.",
+    "link": "https://github.com/suryaprabhat/college-discovery",
+    "techStack": [
+      "TypeScript",
+      "React.js",
+      "Tailwind CSS"
+    ],
+    "createdAt": "2026-07-04T17:45:38.895Z"
+  },
+  {
+    "_id": "mock-p5",
+    "title": "chatapp",
+    "description": "A real-time chat application utilizing Socket.io and Node.js for instant messaging, room management, and connection monitoring.",
+    "link": "https://github.com/suryaprabhat/chatapp",
+    "techStack": [
+      "JavaScript",
+      "Node.js",
+      "Express.js",
+      "Socket.io"
+    ],
+    "createdAt": "2026-07-04T17:45:38.895Z"
+  },
+  {
+    "_id": "mock-p6",
+    "title": "Spotify-Clone",
+    "description": "A static frontend clone of Spotify layout web player, featuring interactive sidebar controls and track listings.",
+    "link": "https://github.com/suryaprabhat/Spotify-Clone",
+    "techStack": [
+      "HTML",
+      "CSS",
+      "Responsive Design"
+    ],
+    "createdAt": "2026-07-04T17:45:38.895Z"
+  }
+]
