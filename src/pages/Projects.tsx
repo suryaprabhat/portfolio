@@ -13,6 +13,11 @@ interface Project {
   techStack: string[];
 }
 
+interface LanguageInfo {
+  name: string;
+  percentage: number;
+}
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const Projects = () => {
@@ -22,7 +27,7 @@ const Projects = () => {
 
   // LeetCode & GitHub stats with live state initialized to null for loading indicator
   const [stats, setStats] = useState<{
-    github: { publicRepos: number | null },
+    github: { publicRepos: number | null, languages: LanguageInfo[] },
     leetcode: {
       totalSolved: number | null,
       easySolved: number | null,
@@ -31,7 +36,7 @@ const Projects = () => {
       ranking: string | null,
     }
   }>({
-    github: { publicRepos: null },
+    github: { publicRepos: null, languages: [] },
     leetcode: {
       totalSolved: null,
       easySolved: null,
@@ -67,7 +72,10 @@ const Projects = () => {
       })
       .then((data) => {
         setStats({
-          github: { publicRepos: data.github.publicRepos },
+          github: { 
+            publicRepos: data.github.publicRepos,
+            languages: data.github.languages || []
+          },
           leetcode: {
             totalSolved: data.leetcode.totalSolved,
             easySolved: data.leetcode.easySolved,
@@ -81,7 +89,15 @@ const Projects = () => {
         console.error('Failed to load live stats:', err);
         // Fallback to static numbers on error
         setStats({
-          github: { publicRepos: 30 },
+          github: { 
+            publicRepos: 30,
+            languages: [
+              { name: 'Python', percentage: 45 },
+              { name: 'JavaScript', percentage: 25 },
+              { name: 'TypeScript', percentage: 15 },
+              { name: 'HTML/CSS', percentage: 15 }
+            ]
+          },
           leetcode: {
             totalSolved: 203,
             easySolved: 157,
@@ -253,26 +269,56 @@ const Projects = () => {
 
               <div className="space-y-2.5">
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Languages Share:</span>
-                <div className="flex h-3 w-full bg-white/5 rounded-full overflow-hidden">
-                  <div className="bg-blue-500 h-full" style={{ width: '45%' }} title="Python: 45%"></div>
-                  <div className="bg-yellow-500 h-full" style={{ width: '30%' }} title="JavaScript/TypeScript: 30%"></div>
-                  <div className="bg-orange-600 h-full" style={{ width: '15%' }} title="HTML: 15%"></div>
-                  <div className="bg-purple-600 h-full" style={{ width: '10%' }} title="CSS/Other: 10%"></div>
-                </div>
-                <div className="flex flex-wrap gap-x-3 gap-y-1 pt-1">
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400">
-                    <span className="w-2 h-2 rounded-full bg-blue-500 inline-block"></span>
-                    Python (45%)
+                
+                {stats.github.publicRepos !== null && stats.github.languages && stats.github.languages.length > 0 ? (
+                  <>
+                    <div className="flex h-3 w-full bg-white/5 rounded-full overflow-hidden">
+                      {stats.github.languages.map((lang) => {
+                        let bgColor = 'bg-gray-500';
+                        if (lang.name === 'Python') bgColor = 'bg-blue-500';
+                        else if (lang.name === 'JavaScript') bgColor = 'bg-yellow-500';
+                        else if (lang.name === 'TypeScript') bgColor = 'bg-blue-400';
+                        else if (lang.name === 'HTML') bgColor = 'bg-orange-600';
+                        else if (lang.name === 'CSS') bgColor = 'bg-purple-600';
+                        else if (lang.name === 'C++') bgColor = 'bg-rose-500';
+                        else if (lang.name === 'Java') bgColor = 'bg-red-500';
+                        
+                        return (
+                          <div 
+                            key={lang.name}
+                            className={`${bgColor} h-full transition-all duration-500`} 
+                            style={{ width: `${lang.percentage}%` }} 
+                            title={`${lang.name}: ${lang.percentage}%`}
+                          ></div>
+                        );
+                      })}
+                    </div>
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 pt-1">
+                      {stats.github.languages.slice(0, 4).map((lang) => {
+                        let dotColor = 'bg-gray-500';
+                        if (lang.name === 'Python') dotColor = 'bg-blue-500';
+                        else if (lang.name === 'JavaScript') dotColor = 'bg-yellow-500';
+                        else if (lang.name === 'TypeScript') dotColor = 'bg-blue-400';
+                        else if (lang.name === 'HTML') dotColor = 'bg-orange-600';
+                        else if (lang.name === 'CSS') dotColor = 'bg-purple-600';
+                        else if (lang.name === 'C++') dotColor = 'bg-rose-500';
+                        else if (lang.name === 'Java') dotColor = 'bg-red-500';
+
+                        return (
+                          <div key={lang.name} className="flex items-center gap-1 text-[10px] text-gray-400">
+                            <span className={`w-2 h-2 rounded-full ${dotColor} inline-block`}></span>
+                            {lang.name} ({lang.percentage}%)
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="h-3 w-full bg-white/10 rounded animate-pulse"></div>
+                    <div className="h-4 w-2/3 bg-white/10 rounded animate-pulse"></div>
                   </div>
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400">
-                    <span className="w-2 h-2 rounded-full bg-yellow-500 inline-block"></span>
-                    JS/TS (30%)
-                  </div>
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400">
-                    <span className="w-2 h-2 rounded-full bg-orange-600 inline-block"></span>
-                    HTML (15%)
-                  </div>
-                </div>
+                )}
               </div>
             </CardContent>
             <CardFooter className="pt-2">

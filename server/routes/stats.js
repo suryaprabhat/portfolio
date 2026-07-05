@@ -8,6 +8,12 @@ const LEETCODE_USERNAME = 'Surya_Prabhat';
 const fallbackStats = {
   github: {
     publicRepos: 30,
+    languages: [
+      { name: 'Python', percentage: 45 },
+      { name: 'JavaScript', percentage: 25 },
+      { name: 'TypeScript', percentage: 15 },
+      { name: 'HTML/CSS', percentage: 15 }
+    ]
   },
   leetcode: {
     totalSolved: 203,
@@ -20,11 +26,14 @@ const fallbackStats = {
 
 router.get('/', async (req, res) => {
   const stats = {
-    github: { ...fallbackStats.github },
+    github: { 
+      publicRepos: fallbackStats.github.publicRepos,
+      languages: [...fallbackStats.github.languages]
+    },
     leetcode: { ...fallbackStats.leetcode }
   };
 
-  // 1. Fetch GitHub Stats
+  // 1. Fetch GitHub Stats & Language Distribution dynamically
   try {
     const ghResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
       headers: { 'User-Agent': 'Mozilla/5.0 Node-Fetch' }
@@ -32,6 +41,35 @@ router.get('/', async (req, res) => {
     if (ghResponse.ok) {
       const ghData = await ghResponse.json();
       stats.github.publicRepos = ghData.public_repos;
+    }
+
+    // Fetch user repositories to analyze actual programming languages
+    const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, {
+      headers: { 'User-Agent': 'Mozilla/5.0 Node-Fetch' }
+    });
+    if (reposResponse.ok) {
+      const repos = await reposResponse.json();
+      const langCounts = {};
+      let totalLangs = 0;
+
+      for (const repo of repos) {
+        if (repo.language) {
+          langCounts[repo.language] = (langCounts[repo.language] || 0) + 1;
+          totalLangs++;
+        }
+      }
+
+      if (totalLangs > 0) {
+        // Calculate percentages
+        const languages = Object.entries(langCounts)
+          .map(([name, count]) => ({
+            name,
+            percentage: Math.round((count / totalLangs) * 100)
+          }))
+          .sort((a, b) => b.percentage - a.percentage);
+
+        stats.github.languages = languages;
+      }
     }
   } catch (err) {
     console.error('Failed to fetch live GitHub stats:', err.message);
