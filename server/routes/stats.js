@@ -7,7 +7,7 @@ const LEETCODE_USERNAME = 'Surya_Prabhat';
 // Fallback stats in case of rate-limiting or network issues
 const fallbackStats = {
   github: {
-    publicRepos: 30,
+    publicRepos: 47,
     languages: [
       { name: 'Python', percentage: 45 },
       { name: 'JavaScript', percentage: 25 },
@@ -35,20 +35,22 @@ router.get('/', async (req, res) => {
 
   // 1. Fetch GitHub Stats & Language Distribution dynamically
   try {
-    const ghResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-      headers: { 'User-Agent': 'Mozilla/5.0 Node-Fetch' }
-    });
-    if (ghResponse.ok) {
-      const ghData = await ghResponse.json();
-      stats.github.publicRepos = ghData.public_repos;
+    const headers = { 'User-Agent': 'Mozilla/5.0 Node-Fetch' };
+    if (process.env.GITHUB_TOKEN) {
+      headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`;
     }
 
-    // Fetch user repositories to analyze actual programming languages
+    // Fetch user repositories to analyze actual programming languages and count repos
     const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`, {
-      headers: { 'User-Agent': 'Mozilla/5.0 Node-Fetch' }
+      headers
     });
+    
     if (reposResponse.ok) {
       const repos = await reposResponse.json();
+      
+      // Update publicRepos count dynamically from the actual repos array length (resolves to 47)
+      stats.github.publicRepos = repos.length;
+
       const langCounts = {};
       let totalLangs = 0;
 
@@ -70,6 +72,8 @@ router.get('/', async (req, res) => {
 
         stats.github.languages = languages;
       }
+    } else {
+      console.warn(`GitHub API request failed with status: ${reposResponse.status}. Using fallback repos count.`);
     }
   } catch (err) {
     console.error('Failed to fetch live GitHub stats:', err.message);
